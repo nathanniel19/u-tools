@@ -17,6 +17,7 @@ import PageToolsAdminAdd from "./Pages/PageToolsAdminAdd";
 import PageToolsAdminAudit from "./Pages/PageToolsAdminAudit";
 import PageToolsAdminHistory from "./Pages/PageToolsAdminHistory";
 import PageAdminHistoryToolsData from "./Pages/PageAdminHistoryToolsData";
+import PageAdminToolsEdit from "./Pages/PageAdminToolsEdit";
 
 function App() {
   
@@ -34,6 +35,7 @@ function App() {
             <Route path="/toolDocs/Admin/:toolID/historyDate" element={ <PageToolsAdminHistory /> } />
             <Route path="/toolDocs/Admin/:toolID/historyDate/:date" element={ <PageAdminHistoryToolsData /> } />
             <Route path="/toolDocs/Admin/:toolID/listTools" element={ <PageToolsAdminCheck />} />
+            <Route path="/toolDocs/Admin/:toolID/listTools/edit" element={ <PageAdminToolsEdit />} />
             <Route path="/toolDocs/Admin/:toolID/listTools/add" element={ <PageToolsAdminAdd />} />
             <Route path="/toolDocs/:toolID" element={ <PageToolData /> } />
           </Routes>

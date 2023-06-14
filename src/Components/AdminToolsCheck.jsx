@@ -1,7 +1,7 @@
 //React
 import { React, useState, useEffect } from 'react';
 //Routing
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 //MUI
 import {
     Card,
@@ -18,6 +18,12 @@ import {
     TableContainer,
     Paper,
     Button,
+    Dialog,
+    DialogActions,
+    DialogContent,
+    DialogContentText,
+    DialogTitle,
+    TextField,
 } from "@mui/material";
 //Icon
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -28,13 +34,15 @@ import Theme from '../Theme';
 import NavbarBack from './NavbarBack';
 //Database
 import { db } from '../firebase/FirebaseConfig';
-import { getDocs, collection, deleteDoc, doc } from 'firebase/firestore';
+import { getDocs, collection, deleteDoc, doc, setDoc } from 'firebase/firestore';
 
 const AdminToolsCheck = () => {
     //Router
     const { toolID } = useParams();
+    const navigate = useNavigate();
     //Data State
     const [toolList, setToolList] = useState([]);
+    const [open, setOpen] = useState(false);
     //Fetch data
     useEffect(() => {
         const fetchData = async () => {
@@ -47,8 +55,11 @@ const AdminToolsCheck = () => {
         fetchData();
     }, []);
     //console.log(toolList)
-    
-    
+    //Edit Button
+    const editButton = () => {
+        navigate("edit")
+    }
+
     return (
         <div>
             <NavbarBack />
@@ -77,6 +88,7 @@ const AdminToolsCheck = () => {
                                     <TableRow>
                                         <TableCell align='center'>Tools Id</TableCell>
                                         <TableCell align="center">Tools Name</TableCell>
+                                        <TableCell align="center">Edit Tools</TableCell>
                                         <TableCell align="center">Delete Tools</TableCell>
                                     </TableRow>
                                 </TableHead>
@@ -86,9 +98,18 @@ const AdminToolsCheck = () => {
                                             <TableCell align="center">{ data.toolRegistID }</TableCell>
                                             <TableCell align="center">{ data.name }</TableCell>
                                             <TableCell align="center">
+                                                <Button
+                                                    variant="contained"
+                                                    endIcon={ <CreateIcon />}
+                                                    onClick={ editButton }
+                                                >
+                                                    Edit
+                                                </Button>
+                                            </TableCell>
+                                            <TableCell align="center">
                                                 <Button 
                                                     variant="contained"
-                                                    onClick={async () => {
+                                                    onClick={ async () => {
                                                         await deleteDoc(doc(db, "toolData", toolID, "toolList", data.toolRegistID));
                                                         alert("Document Deleted")
                                                         window.location.reload();
