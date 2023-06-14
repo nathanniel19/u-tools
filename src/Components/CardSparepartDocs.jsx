@@ -18,7 +18,7 @@ const CardSparepartDocs = () => {
         <Card sx={{ maxWidth: 400, mt: 15, height: 350 }}>
             <CardMedia
                 sx={{ height: 120 }}
-                image="null"
+                image="https://otoklix-production.s3.amazonaws.com/uploads/2021/09/sparepart-mobil.jpg"
             />
             <CardContent>
                 <Typography gutterBottom variant="h5" color="#212121">
@@ -30,7 +30,7 @@ const CardSparepartDocs = () => {
                 </Typography>
             </CardContent>
             <CardActions sx={{ mb: 1 }}>
-                <Button size="small" variant="contained" sx={{ mt: 2, ml: 1, bgcolor: "#ff9800", ":hover": {bgcolor: "#f57c00"} }}>Lihat Selengkapnya</Button>
+                <Button disabled size="small" variant="contained" sx={{ mt: 2, ml: 1, bgcolor: "#ff9800", ":hover": {bgcolor: "#f57c00"} }}>Lihat Selengkapnya</Button>
             </CardActions>
         </Card>
     </div>

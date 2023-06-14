@@ -35,7 +35,7 @@ function App() {
             <Route path="/toolDocs/Admin/:toolID/historyDate" element={ <PageToolsAdminHistory /> } />
             <Route path="/toolDocs/Admin/:toolID/historyDate/:date" element={ <PageAdminHistoryToolsData /> } />
             <Route path="/toolDocs/Admin/:toolID/listTools" element={ <PageToolsAdminCheck />} />
-            <Route path="/toolDocs/Admin/:toolID/listTools/edit" element={ <PageAdminToolsEdit />} />
+            <Route path="/toolDocs/Admin/:toolID/listTools/edit/:idTools" element={ <PageAdminToolsEdit />} />
             <Route path="/toolDocs/Admin/:toolID/listTools/add" element={ <PageToolsAdminAdd />} />
             <Route path="/toolDocs/:toolID" element={ <PageToolData /> } />
           </Routes>

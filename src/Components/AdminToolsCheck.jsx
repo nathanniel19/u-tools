@@ -39,6 +39,7 @@ import { getDocs, collection, deleteDoc, doc, setDoc } from 'firebase/firestore'
 const AdminToolsCheck = () => {
     //Router
     const { toolID } = useParams();
+    const { idTools } = useParams();
     const navigate = useNavigate();
     //Data State
     const [toolList, setToolList] = useState([]);
@@ -55,10 +56,7 @@ const AdminToolsCheck = () => {
         fetchData();
     }, []);
     //console.log(toolList)
-    //Edit Button
-    const editButton = () => {
-        navigate("edit")
-    }
+    
 
     return (
         <div>
@@ -98,13 +96,15 @@ const AdminToolsCheck = () => {
                                             <TableCell align="center">{ data.toolRegistID }</TableCell>
                                             <TableCell align="center">{ data.name }</TableCell>
                                             <TableCell align="center">
-                                                <Button
-                                                    variant="contained"
-                                                    endIcon={ <CreateIcon />}
-                                                    onClick={ editButton }
-                                                >
-                                                    Edit
-                                                </Button>
+                                                <Link to={ "edit/" + data.toolRegistID }>
+                                                    <Button
+                                                        variant="contained"
+                                                        endIcon={ <CreateIcon />}
+                                                        
+                                                    >
+                                                        Edit
+                                                    </Button>
+                                                </Link>
                                             </TableCell>
                                             <TableCell align="center">
                                                 <Button 

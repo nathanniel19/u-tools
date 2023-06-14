@@ -19,7 +19,7 @@ const CardUnitDocs = () => {
             <Card sx={{ maxWidth: 400, mt: 15, height: 350 }}>
                 <CardMedia
                     sx={{ height: 120 }}
-                    image="null"
+                    image="https://ulti.co.id/wp-content/uploads/2022/04/TH2.jpg"
                 />
                 <CardContent>
                     <Typography gutterBottom variant="h5" color="#212121" align="left">
@@ -36,6 +36,7 @@ const CardUnitDocs = () => {
                         variant="contained" 
                         sx={{ ml: 1, bgcolor: "#ff9800", ":hover": {bgcolor: "#f57c00"}}} 
                         onClick={ () => navigate("/unitDocs")}
+                        disabled
                     >
                         Lihat Selengkapnya
                     </Button>

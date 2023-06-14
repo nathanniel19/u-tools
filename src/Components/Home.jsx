@@ -23,8 +23,8 @@ const Home = () => {
                     mt: 2,
                     display: "flex",
                     flexDirection: { xs: "column", sm: "row", md: "row", lg: "row", xl: "row" },
-                    justifyContent: "space-between",
-                    gap: 1
+                    justifyContent: "space-evenly",
+                    gap: 0.5
                 }}
             >
                 <CardUnitDocs />

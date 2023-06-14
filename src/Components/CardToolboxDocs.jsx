@@ -11,6 +11,7 @@ import {
     CardContent,
     Paper
 } from "@mui/material";
+//Icon
 //Router
 import { useNavigate } from "react-router-dom";
 
@@ -21,7 +22,7 @@ const CardToolboxDocs = () => {
             <Card sx={{ maxWidth: 400, mt: 2, height: 350 }}>
                 <CardMedia
                     sx={{ height: 120 }}
-                    image="null"
+                    image="https://static8.depositphotos.com/1064024/1068/i/600/depositphotos_10681426-stock-photo-set-of-different-tools.jpg"
                 />
                 <CardContent>
                     <Typography gutterBottom variant="h5" color="#212121">
