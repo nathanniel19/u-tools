@@ -77,8 +77,6 @@ const AdminToolsCheck = () => {
                                     <TableRow>
                                         <TableCell align='center'>Tools Id</TableCell>
                                         <TableCell align="center">Tools Name</TableCell>
-                                        <TableCell align="center">Status Tools</TableCell>
-                                        <TableCell align="center">Date Checked</TableCell>
                                         <TableCell align="center">Delete Tools</TableCell>
                                     </TableRow>
                                 </TableHead>
@@ -87,12 +85,6 @@ const AdminToolsCheck = () => {
                                         <TableRow key={ index }>
                                             <TableCell align="center">{ data.toolRegistID }</TableCell>
                                             <TableCell align="center">{ data.name }</TableCell>
-                                            <TableCell align="center">
-                                                { data.status ? 
-                                                    <Typography variant="body1">OK</Typography> :
-                                                    <Typography variant="body1">Not OK</Typography>  }
-                                            </TableCell>
-                                            <TableCell align="center">{ data.dateChecked }</TableCell>
                                             <TableCell align="center">
                                                 <Button 
                                                     variant="contained"

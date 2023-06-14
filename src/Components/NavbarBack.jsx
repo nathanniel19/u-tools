@@ -36,7 +36,7 @@ const NavbarBack = () => {
                             >
                                 <KeyboardBackspaceIcon size="small"/>
                             </IconButton>
-                            <Typography align="center" variant='h6' sx={{ flexGrow: 1, fontWeight: 700, color: "#212121" }}>U-Tools</Typography>
+                            <Typography align="center" variant='h6' sx={{ flexGrow: 1, fontWeight: 700, color: "#212121" }}>ULTI-mate</Typography>
                         </Toolbar>
                     </AppBar>
                 </Box>

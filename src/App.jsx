@@ -14,6 +14,9 @@ import PageToolsAdmin from "./Pages/PageToolsAdmin";
 import PageToolsAdminCheck from "./Pages/PageToolsAdminCheck";
 import PageToolsAdminRegister from "./Pages/PageToolsAdminRegister";
 import PageToolsAdminAdd from "./Pages/PageToolsAdminAdd";
+import PageToolsAdminAudit from "./Pages/PageToolsAdminAudit";
+import PageToolsAdminHistory from "./Pages/PageToolsAdminHistory";
+import PageAdminHistoryToolsData from "./Pages/PageAdminHistoryToolsData";
 
 function App() {
   
@@ -27,8 +30,11 @@ function App() {
             <Route path="/toolDocs" element={ <PageToolDocs /> } />
             <Route path="/toolDocs/Admin" element={ <PageToolsAdmin /> } />
             <Route path="/toolDocs/Admin/registerTools" element={ <PageToolsAdminRegister />} />
-            <Route path="/toolDocs/Admin/:toolID" element={ <PageToolsAdminCheck /> } />
-            <Route path="/toolDocs/Admin/:toolID/add" element={ <PageToolsAdminAdd />} />
+            <Route path="/toolDocs/Admin/:toolID" element={ <PageToolsAdminAudit />} />
+            <Route path="/toolDocs/Admin/:toolID/historyDate" element={ <PageToolsAdminHistory /> } />
+            <Route path="/toolDocs/Admin/:toolID/historyDate/:date" element={ <PageAdminHistoryToolsData /> } />
+            <Route path="/toolDocs/Admin/:toolID/listTools" element={ <PageToolsAdminCheck />} />
+            <Route path="/toolDocs/Admin/:toolID/listTools/add" element={ <PageToolsAdminAdd />} />
             <Route path="/toolDocs/:toolID" element={ <PageToolData /> } />
           </Routes>
         </Router>

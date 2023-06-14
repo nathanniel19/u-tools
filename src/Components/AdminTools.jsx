@@ -11,7 +11,7 @@ import {
   Button,
 } from "@mui/material";
 //Routing
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 //Theme
 import Theme from "../Theme";
 //Database
@@ -28,6 +28,7 @@ import NavbarBack from "../Components/NavbarBack";
 const AdminTools = () => {
   //Route
   const navigate = useNavigate();
+  const { toolID } = useParams();
   //State
   const [toolsData, setToolsData] = useState([]);
   //Load
@@ -77,7 +78,13 @@ const AdminTools = () => {
                         <Typography variant="body2">{ data.name }</Typography>
                       </Container>
                       <Link to={ data.toolCode }>
-                        <Button variant="contained" endIcon={ <VisibilityIcon /> } color="secondary" >Check</Button>
+                        <Button 
+                          variant="contained" 
+                          endIcon={ <VisibilityIcon /> } 
+                          color="secondary"
+                        >
+                          Check
+                        </Button>
                       </Link>
                       <Link>
                         <Button 

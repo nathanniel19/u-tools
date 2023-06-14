@@ -27,6 +27,7 @@ const initialValue = {
     name: "",
     status: true,
     dateChecked: null,
+    remarks: "OK",
 }
 
 const AdminAddTools = () => {

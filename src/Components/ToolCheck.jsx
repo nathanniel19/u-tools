@@ -20,13 +20,14 @@ import {
     Button,
     FormControl,
     FormHelperText,
+    TextField,
 } from "@mui/material";
 //RouteID
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 //Theme
 import Theme from '../Theme';
 //Database
-import { collection, doc, getDocs, setDoc, updateDoc, arrayUnion } from "firebase/firestore";
+import { collection, doc, getDocs, setDoc, updateDoc, arrayUnion, addDoc } from "firebase/firestore";
 import { db } from "../firebase/FirebaseConfig";
 //Component
 import NavbarBack from './NavbarBack';
@@ -42,8 +43,10 @@ const initialValue = [{
 const ToolCheck = () => {
     //Routing
     const { toolID } = useParams();
+    const navigate = useNavigate();
     //State
     const [toolData, setToolData] = useState([]);
+    const [toolRegistID, setToolRegistID] = useState([]);
     const [statusTool, setStatusTool] = useState(true);
     const [dateData, setDate] = useState('');
     const [updateData, setUpdateData] = useState(initialValue);
@@ -53,13 +56,15 @@ const ToolCheck = () => {
         const queryData = async () => {
             const toolListRef = collection(db, "toolData", toolID, "toolList")
             const querySnaphot = await getDocs(toolListRef);
-            const date = new Date().toLocaleDateString("in");
+            const date = new Date().toLocaleDateString("de");
             querySnaphot.forEach((doc) => {
-                setToolData(current => [...current, doc.data()])
+                setToolData(current => [...current, doc.data()]);
+                setToolRegistID(current => [...current, doc.data().toolRegistID]);
+                //console.log(toolRegistID);
             })
         };
         const getDate = () => {
-            const date = new Date().toLocaleDateString("in");
+            const date = new Date().toLocaleDateString("de");
             setDate(date)
         }
         queryData();
@@ -69,17 +74,19 @@ const ToolCheck = () => {
 
     }, [])
 
-    
     //Submit Button 
     const submitButton = (e) => {
         e.preventDefault();
+        const id = toolRegistID.map((data) => data)
         toolData.map((data) => data.dateChecked = dateData);
         toolData.map((data) => {
-            const docRef = doc(db, "toolData", toolID, "toolList", data.toolRegistID);
+            const docRef = collection(db, "/toolData/", toolID, "/toolChecked/", dateData, data.toolRegistID);
             const updateData = async () => {
                 try {
-                    await updateDoc(docRef, data);
-                    //window.alert("Document Updated");
+                    
+                    await setDoc(doc(db, "/toolData/", toolID, "/toolChecked/", dateData), { date: data.dateChecked });
+                    await setDoc(doc(db, "toolData", toolID, "toolChecked", dateData, "toolList", data.toolRegistID), data)
+                    
                 }
                 catch (err) {
                     console.log(err)
@@ -87,6 +94,8 @@ const ToolCheck = () => {
             };
             updateData();
         });
+        window.alert("Document Submitted");
+        navigate(-1);
         //window.location.reload();
     }
     
@@ -108,6 +117,7 @@ const ToolCheck = () => {
                                         <TableCell align="center">Tool ID</TableCell>
                                         <TableCell align="center">Tool Name</TableCell>
                                         <TableCell align="center">Status</TableCell>
+                                        <TableCell align="center">Remarks</TableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
@@ -118,7 +128,7 @@ const ToolCheck = () => {
                                             <TableCell align="center">
                                                 <FormControl variant="standard" fullWidth>
                                                     <Select
-                                                        defaultValue={ true }
+                                                        defaultValue=""
                                                         onChange={(e) => {
                                                             data.status = e.target.value;
                                                             setToolData([...toolData]);
@@ -130,6 +140,20 @@ const ToolCheck = () => {
                                                     </Select>
                                                     <FormHelperText>Select the Status...</FormHelperText>
                                                 </FormControl>
+                                            </TableCell>
+                                            <TableCell align="center">
+                                                { data.status === true ?
+                                                    <TextField label="-" disabled/> :
+                                                    <TextField 
+                                                        label="Insert Remarks" 
+                                                        name={ data.remarks }
+                                                        onChange={(e) => {
+                                                            data.remarks = e.target.value;
+                                                            setToolData([...toolData]);
+                                                        }} 
+                                                        required
+                                                    />
+                                                }
                                             </TableCell>
                                         </TableRow>
                                     ))}

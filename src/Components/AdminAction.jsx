@@ -1,5 +1,5 @@
 //React
-import React from 'react';
+import { React, useState } from 'react';
 //MUI
 import {
     Container,
@@ -10,15 +10,46 @@ import {
     ThemeProvider,
     Button,
     Box,
+    TextField,
+    Dialog,
+    DialogActions,
+    DialogContent,
+    DialogContentText,
+    DialogTitle,
 } from "@mui/material";
 //Router
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 //Icon
 import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
 //Theme
 import Theme from '../Theme';
 
 const AdminAction = () => {
+    //Route
+    const navigate = useNavigate();
+    //State
+    const [open, setOpen] = useState(false);
+    const [password, setPassword] = useState('')
+    const user = "admin123"
+    //Dialog Interaction
+    const dialogOpen = () => {
+        setOpen(true);
+    };
+    const dialogClose = () => {
+        setOpen(false);
+    };
+    //Password Field
+    const passwordChange = (e) => {
+        setPassword(e.target.value)
+    }
+    //Submit Button
+    const buttonSubmit = (e) => {
+        password === user ? 
+            navigate("/toolDocs/Admin") : 
+            window.alert("Wrong");
+        
+    }
+
     return (
         <div>
             <ThemeProvider theme={ Theme } >
@@ -39,14 +70,34 @@ const AdminAction = () => {
                                 </Typography>
                             </CardContent>
                             <CardActions>
-                                <Link to="/toolDocs/Admin">
-                                    <Button variant="contained" size="medium" endIcon={ <SupervisorAccountIcon /> }>
-                                        Admin
-                                    </Button>
-                                </Link>
+                                <Button variant="contained" size="medium" endIcon={ <SupervisorAccountIcon /> } onClick={ dialogOpen }>
+                                    Admin
+                                </Button>
                             </CardActions>
                         </Box>
                     </Card>
+                    <Dialog open={ open } onClose={ dialogClose }>
+                        <DialogTitle>Admin Page</DialogTitle>
+                        <DialogContent>
+                            <DialogContentText>
+                                You will direct open Admin Page. Please insert the password.
+                            </DialogContentText>
+                            <TextField
+                                autoFocus
+                                margin="dense"
+                                name="password"
+                                label="Insert Password"
+                                type="password"
+                                fullWidth
+                                variant="standard"
+                                onChange={ passwordChange }
+                            />
+                        </DialogContent>
+                        <DialogActions>
+                            <Button onClick={ dialogClose }>Cancel</Button>
+                            <Button onClick={ buttonSubmit }>Enter</Button>
+                        </DialogActions>
+                    </Dialog>
                 </Container>
             </ThemeProvider>
         </div>
